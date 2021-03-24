@@ -7,7 +7,8 @@ class CalculatorCalculations extends Component {
         value1:[],
         value2:[],
         sign:'',
-        result : 0
+        result : 0,
+        history: 0,
     }
     handleEqual = (value1,sign,value2)=>{
         this.buttonsValue(value1,sign,value2)
@@ -50,6 +51,8 @@ class CalculatorCalculations extends Component {
                 value2:[],
             })
         }
+        this.state.history = result
+        this.setState({history:this.state.history})
         this.props.getfinal(result)
     }
     sub = () =>{
@@ -65,6 +68,8 @@ class CalculatorCalculations extends Component {
                 value2:[],
             })
         }
+        this.state.history = result
+        this.setState({history:this.state.history})
         this.props.getfinal(result)
     }
     mul = () =>{
@@ -80,6 +85,8 @@ class CalculatorCalculations extends Component {
                 value2:[],
             })
         }
+        this.state.history = result
+        this.setState({history:this.state.history})
         this.props.getfinal(result)
     }
     div = () =>{
@@ -95,6 +102,8 @@ class CalculatorCalculations extends Component {
                 value2:[],
             })
         }
+        this.state.history = result
+        this.setState({history:this.state.history})
         this.props.getfinal(result)
     }
     mod = () =>{
@@ -110,6 +119,8 @@ class CalculatorCalculations extends Component {
                 value2:[],
             })
         }
+        this.state.history = result
+        this.setState({history:this.state.history})
         this.props.getfinal(result)
     }
     clr = () =>{
@@ -127,6 +138,7 @@ class CalculatorCalculations extends Component {
                 <CalculatorButtons 
                     getEqual={this.handleEqual}
                     getClear = {this.handleClear}
+                    getHistory = {this.state.history}
                     />
             </React.Fragment>
             

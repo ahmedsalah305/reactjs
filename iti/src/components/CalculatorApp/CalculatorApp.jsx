@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import CalculatorButtons from './CalculatorButtons';
 import CalculatorDisplay from './CalculatorDisplay';
 import CalculatorCalculations from './CalculatorCalculation';
 
@@ -8,8 +7,7 @@ class CalculatorApp extends Component {
         result:0
     }
     handleResult = (result)=>{
-        this.state.result = result
-        this.setState({result:this.state.result})
+        this.setState({result:result})
     }
     render() { 
         return ( 

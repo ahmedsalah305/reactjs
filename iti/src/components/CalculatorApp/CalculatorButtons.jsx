@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
-import CalculatorPanel from './CalculatorPanel';
 
 class CalculatorButtons extends Component {
     state = { 
         value1:[],
         value2:[],
         sign:'',
+        history:0,
     }
-    counter = 1
     flagNumber = true
     flagSign = true
     flagPrepare = true
+    flagValue1 = true
     prepare = []
     sum = ""
     handleEqual = (event)=>{
@@ -21,6 +21,10 @@ class CalculatorButtons extends Component {
             this.flagNumber = true
             this.flagSign = true
             this.flagPrepare = true
+            this.flagValue1 = !this.flagValue1
+            console.log("i am value1: " + this.state.value1)
+            console.log("i am sign: " + this.state.sign)
+            console.log("i am value2: " + this.state.value2)
             this.props.getEqual(this.state.value1,this.state.sign,this.state.value2)
             this.setState({
                 value1:[],
@@ -34,7 +38,7 @@ class CalculatorButtons extends Component {
     }
     handleClick = (event) =>{
         var buttonValue = event.target.value
-        const buttonInfo = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        const buttonInfo = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
         for(var buttonInfoCounter in buttonInfo)
         {
             if(buttonInfoCounter === buttonValue)
@@ -42,23 +46,35 @@ class CalculatorButtons extends Component {
                 buttonValue = Number(buttonValue)
             }
         }
-        
         if(typeof(buttonValue) === typeof(1) && this.flagNumber === true)
         {
             var number = String(event.target.value)
+            if(number == 10 && this.flagValue1)
+            {
+                this.flagValue1 = !this.flagValue1
+                number = "."
+            }
             this.prepare.push(number)
             for(var iterate = 0 ; iterate < this.prepare.length ; iterate++)
             {
-                
                 this.sum = this.sum + this.prepare[iterate]
             }
-            this.state.value1.length=0
+            console.log("sum from first: " + this.sum)
+            this.state.value1.length = 0
+            this.setState({value1:this.state.value1.length})
             this.state.value1.push(this.sum)
             this.setState({value1:this.state.value1})
             this.sum = ""
         }
         if((typeof(buttonValue) === typeof(" ")) && this.flagSign === true)
         {
+            if(!this.state.value1.length)
+            {
+                this.state.history = this.props.getHistory
+                this.setState({history:this.state.history})
+                this.state.value1.push(this.state.history)
+                this.setState({value1:this.state.value1})
+            }
             this.flagSign = false
             this.flagNumber = false
             this.setState({sign:buttonValue})
@@ -71,12 +87,17 @@ class CalculatorButtons extends Component {
                 this.prepare.length = 0
             }
             var number = String(event.target.value)
+            if(number === "10" && !this.flagValue1)
+            {
+                this.flagValue1 = !this.flagValue1
+                number = "."
+            }
             this.prepare.push(number)
             for(var iterate = 0 ; iterate < this.prepare.length ; iterate++)
             {
-                
                 this.sum = this.sum + this.prepare[iterate]
             }
+            console.log("sum from second: " + this.sum)
             this.state.value2.length=0
             this.state.value2.push(this.sum)
             this.setState({value2:this.state.value2})
@@ -106,7 +127,7 @@ class CalculatorButtons extends Component {
                     </div>   
                     <div>   
                         <button className={numberClass} value={0} style={{width:"98px"}}   onClick={this.handleClick}>0</button>
-                        <button className={symbolClass} value="." onClick={this.handleClick}>.</button>
+                        <button className={symbolClass} value={10} onClick={this.handleClick}>.</button>
                     </div>
                 </div>
                 <div style={{display:"inline-block"}}>
@@ -127,6 +148,10 @@ class CalculatorButtons extends Component {
                         <button className={symbolClass} value="="   onClick={this.handleEqual}>=</button>
                     </div>
                 </div>
+                {/* <CalculatorPanel 
+                buttonOnClick={this.handleClick}
+                buttonValue={}
+                /> */}
             </React.Fragment>
          );
     }
