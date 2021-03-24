@@ -1,0 +1,7 @@
+#-------------------to use semantic---------------#
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.css">
+https://semantic-ui.com/introduction/getting-started.html
+
+#---------------to install faker------------------#
+npm install --save faker
+https://github.com/marak/Faker.js/
