@@ -26,8 +26,8 @@ import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 // Comment App end
 
-import CalculatorApp from './components/CalculatorApp/CalculatorApp';
+import App from './components/CalculatorApp/App';
 
-const myApp = <CalculatorApp/>
+const myApp = <App/>
 const myLocation = document.querySelector('#root')
 ReactDOM.render(myApp, myLocation);
