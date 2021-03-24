@@ -1,54 +1,86 @@
 import React, { Component } from 'react';
+import CalculatorPanel from './CalculatorPanel';
 
 class CalculatorButtons extends Component {
     state = { 
-        operation:[],
+        value1:[],
+        value2:[],
+        sign:'',
     }
     counter = 1
+    flagNumber = true
+    flagSign = true
+    flagPrepare = true
+    prepare = []
+    sum = ""
     handleEqual = (event)=>{
         console.log("i am equal: " + event.target.value)
-        this.props.getEqual(this.state.operation[1])
-        this.state.operation.length=0
-        this.setState({operation:this.state.operation})
-        console.log("display operation in state after clear: " + this.state.operation);
+        if(this.state.value1.length && this.state.sign && this.state.value2.length)
+        {
+            this.prepare.length = 0
+            this.flagNumber = true
+            this.flagSign = true
+            this.flagPrepare = true
+            this.props.getEqual(this.state.value1,this.state.sign,this.state.value2)
+            this.setState({
+                value1:[],
+                value2:[],
+                sign:'',
+            })
+        }
     }
     handleClear = (event)=>{
         this.props.getClear(event.target.value)
     }
     handleClick = (event) =>{
-        if (this.counter === 1)
+        var buttonValue = event.target.value
+        const buttonInfo = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
+        for(var buttonInfoCounter in buttonInfo)
         {
-            var value1 = event.target.value
-            this.state.operation.push(value1)
-            this.setState({operation:this.state.operation})
-            this.counter = 2
-            console.log("i got value 1: " + value1);
-        }
-        else if (this.counter === 2)
-        {
-            var op = event.target.value
-            this.state.operation.push(op)
-            this.setState({operation:this.state.operation})
-            this.counter = 3
-            console.log("i got op: " + op);
-        }
-        else if (this.counter === 3)
-        {
-            var value2 = event.target.value
-            this.state.operation.push(value2)
-            this.setState({operation:this.state.operation})
-            this.counter = 1
-            console.log("i got value 2: " + value2);
-            var obj = {
-                value1:this.state.operation[0],
-                op:this.state.operation[1],
-                value2:this.state.operation[2],
+            if(buttonInfoCounter === buttonValue)
+            {
+                buttonValue = Number(buttonValue)
             }
-            console.log("i got obj: " + obj);
-            this.state.operation.push(obj)
-            this.setState({operation:this.state.operation})
-            this.props.getButtonsValue(this.state.operation)
-            console.log("display operation in state before clear: " + this.state.operation);
+        }
+        
+        if(typeof(buttonValue) === typeof(1) && this.flagNumber === true)
+        {
+            var number = String(event.target.value)
+            this.prepare.push(number)
+            for(var iterate = 0 ; iterate < this.prepare.length ; iterate++)
+            {
+                
+                this.sum = this.sum + this.prepare[iterate]
+            }
+            this.state.value1.length=0
+            this.state.value1.push(this.sum)
+            this.setState({value1:this.state.value1})
+            this.sum = ""
+        }
+        if((typeof(buttonValue) === typeof(" ")) && this.flagSign === true)
+        {
+            this.flagSign = false
+            this.flagNumber = false
+            this.setState({sign:buttonValue})
+        }
+        if(typeof(buttonValue) === typeof(1) && this.flagNumber === false)
+        {
+            if(this.flagPrepare)
+            {
+                this.flagPrepare=!this.flagPrepare
+                this.prepare.length = 0
+            }
+            var number = String(event.target.value)
+            this.prepare.push(number)
+            for(var iterate = 0 ; iterate < this.prepare.length ; iterate++)
+            {
+                
+                this.sum = this.sum + this.prepare[iterate]
+            }
+            this.state.value2.length=0
+            this.state.value2.push(this.sum)
+            this.setState({value2:this.state.value2})
+            this.sum = ""
         }
     }
     render() {
@@ -56,34 +88,42 @@ class CalculatorButtons extends Component {
         var symbolClass = "btn btn-lg btn-warning m-1"
         return ( 
             <React.Fragment>
-                <div style={{position:"absolute" , left:"830px"}}>
-                    <div>
-                        <button className={symbolClass} value="C"  onClick={this.handleClear}>C</button>
-                        <button className={symbolClass} value="+/-" onClick={this.handleClick}>+/-</button>
-                        <button className={symbolClass} value="%"   onClick={this.handleClick}>%</button>
-                        <button className={symbolClass} value="÷"   onClick={this.handleClick}>÷</button>
-                    </div>
+                <div style={{display:"inline-block"}}>
                     <div>
                         <button className={numberClass} value={7}   onClick={this.handleClick}>7</button>
                         <button className={numberClass} value={8} style={{width:"54px"}}  onClick={this.handleClick}>8</button>
                         <button className={numberClass} value={9} style={{width:"48px"}}  onClick={this.handleClick}>9</button>
-                        <button className={symbolClass} value="x"   onClick={this.handleClick}>x</button>
                     </div>   
                     <div>   
                         <button className={numberClass} value={4}   onClick={this.handleClick}>4</button>
                         <button className={numberClass} value={5} style={{width:"54px"}}   onClick={this.handleClick}>5</button>
                         <button className={numberClass} value={6} style={{width:"48px"}}  onClick={this.handleClick}>6</button>
-                        <button className={symbolClass} value="-"   onClick={this.handleClick}>-</button>
                     </div>   
                     <div>   
                         <button className={numberClass} value={1}   onClick={this.handleClick}>1</button>
                         <button className={numberClass} value={2} style={{width:"54px"}}  onClick={this.handleClick}>2</button>
                         <button className={numberClass} value={3} style={{width:"48px"}}  onClick={this.handleClick}>3</button>
-                        <button className={symbolClass} value="+"   onClick={this.handleClick}>+</button>
                     </div>   
                     <div>   
                         <button className={numberClass} value={0} style={{width:"98px"}}   onClick={this.handleClick}>0</button>
-                        <button className={symbolClass} value="." style={{width:"48px"}}  onClick={this.handleClick}>.</button>
+                        <button className={symbolClass} value="." onClick={this.handleClick}>.</button>
+                    </div>
+                </div>
+                <div style={{display:"inline-block"}}>
+                    <div>
+                        <button className={symbolClass} value="+/-" onClick={this.handleClick}>+/-</button>
+                        <button className={symbolClass} value="%"   onClick={this.handleClick}>%</button>
+                    </div>
+                    <div>
+                        <button className={symbolClass} value="x"   onClick={this.handleClick}>x</button>
+                        <button className={symbolClass} value="÷"  onClick={this.handleClick}>÷</button>
+                    </div>
+                    <div>
+                        <button className={symbolClass} value="+" onClick={this.handleClick}>+</button>
+                        <button className={symbolClass} value="-"  onClick={this.handleClick}>-</button>
+                    </div>
+                    <div>
+                        <button className={symbolClass} value="C"  onClick={this.handleClick}>C</button>
                         <button className={symbolClass} value="="   onClick={this.handleEqual}>=</button>
                     </div>
                 </div>
