@@ -26,8 +26,30 @@ import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 // Comment App end
 
-import App from './components/CalculatorApp/App';
+// Calculator App start
+
+// import App from './components/CalculatorApp/App';
+
+// const myApp = <App/>
+// const myLocation = document.querySelector('#root')
+// ReactDOM.render(myApp, myLocation);
+
+// // Season App end
+
+// import SeasonApp from './components/SeasonApp/SeasonApp';
+
+// const myApp = <SeasonApp/>
+// const myLocation = document.querySelector('#root')
+// ReactDOM.render(myApp, myLocation);
+
+// // Season App end
+
+// Season App end
+
+import App from './components/Pics/App';
 
 const myApp = <App/>
 const myLocation = document.querySelector('#root')
 ReactDOM.render(myApp, myLocation);
+
+// Season App end

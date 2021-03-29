@@ -13,18 +13,22 @@ class CalculatorButtons extends Component {
     flagValue1 = true
     prepare = []
     sum = ""
-    handleEqual = (event)=>{
-        console.log("i am equal: " + event.target.value)
-        if(this.state.value1.length && this.state.sign && this.state.value2.length)
+    counter = 1
+    handleEqual = ()=>{
+        // && this.state.sign
+        if(this.state.value1.length && this.state.value2.length)
         {
             this.prepare.length = 0
             this.flagNumber = true
             this.flagSign = true
             this.flagPrepare = true
             this.flagValue1 = !this.flagValue1
+            console.log("###########equal start######################")
+            console.log("i am in equal in if condition")
             console.log("i am value1: " + this.state.value1)
             console.log("i am sign: " + this.state.sign)
             console.log("i am value2: " + this.state.value2)
+            console.log("###########equal end########################")
             this.props.getEqual(this.state.value1,this.state.sign,this.state.value2)
             this.setState({
                 value1:[],
@@ -66,8 +70,13 @@ class CalculatorButtons extends Component {
             this.setState({value1:this.state.value1})
             this.sum = ""
         }
-        if((typeof(buttonValue) === typeof(" ")) && this.flagSign === true)
+        // && this.flagSign === true
+        if((typeof(buttonValue) === typeof(" ")))
         {
+            if(this.counter > 1)
+            {
+                this.handleEqual()
+            }
             if(!this.state.value1.length)
             {
                 this.state.history = this.props.getHistory
@@ -75,9 +84,11 @@ class CalculatorButtons extends Component {
                 this.state.value1.push(this.state.history)
                 this.setState({value1:this.state.value1})
             }
-            this.flagSign = false
+            // this.flagSign = false
             this.flagNumber = false
             this.setState({sign:buttonValue})
+            this.counter++;
+            console.log("i am in sign condition: " + buttonValue)
         }
         if(typeof(buttonValue) === typeof(1) && this.flagNumber === false)
         {
@@ -148,10 +159,6 @@ class CalculatorButtons extends Component {
                         <button className={symbolClass} value="="   onClick={this.handleEqual}>=</button>
                     </div>
                 </div>
-                {/* <CalculatorPanel 
-                buttonOnClick={this.handleClick}
-                buttonValue={}
-                /> */}
             </React.Fragment>
          );
     }
