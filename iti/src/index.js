@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import '../node_modules/bootstrap/dist/css/bootstrap.css';
 import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
-
 // Todo App start
 
 // import App from './components/TodoApp/App';
@@ -46,10 +45,20 @@ import '../node_modules/@fortawesome/fontawesome-free/css/all.css';
 
 // Season App end
 
-import App from './components/Pics/App';
+// import App from './components/Pics/App';
+
+// const myApp = <App/>
+// const myLocation = document.querySelector('#root')
+// ReactDOM.render(myApp, myLocation);
+
+// Season App end
+
+// widgets App end
+
+import App from './components/Widgets/App';
 
 const myApp = <App/>
 const myLocation = document.querySelector('#root')
 ReactDOM.render(myApp, myLocation);
 
-// Season App end
+// widgets App end

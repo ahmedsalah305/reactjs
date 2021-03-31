@@ -7,5 +7,9 @@ npm install --save faker
 https://github.com/marak/Faker.js/
 
 npm install antd
+
 npm i react-text-loop
+
 npm install --save axios
+
+npm install --save form-data
