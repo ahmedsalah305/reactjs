@@ -11,3 +11,9 @@ npm i query-string
 npm i react-slick
 npm install slick-carousel --save
 npm i joi
+npm i react-chat-engine
+npm i @ant-design/icons
+npm i @fortawesome/fontawesome-svg-core
+npm i @fortawesome/free-solid-svg-icons
+npm i @fortawesome/react-fontawesome
+npm i react-scroll
