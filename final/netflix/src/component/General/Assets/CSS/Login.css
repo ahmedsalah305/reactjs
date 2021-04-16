@@ -1,0 +1,26 @@
+.login{
+    background-color: #111;
+}
+.login_input{
+    background-color: #0c0c0c !important ;
+    border: none !important;
+    color:white !important;
+    border-radius: 25px !important;
+    
+}
+    
+.signuplink{
+ color:#e50914;
+text-decoration: underline;
+
+}
+
+.login_btn
+{
+background-color: #e50914 ;
+border: none ;
+font-weight: bold ;
+width: 100%  ;
+border-radius: 25px ;
+}
+    

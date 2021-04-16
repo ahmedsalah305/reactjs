@@ -1,0 +1,4 @@
+#!/bin/bash
+
+npx create-react-app netflix
+cd netflix

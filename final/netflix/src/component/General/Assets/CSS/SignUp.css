@@ -1,0 +1,30 @@
+.signup{
+    background-color: #111;
+}
+.signup_input
+{
+background-color: #0c0c0c !important ;
+border: none !important;
+color:white !important;
+border-radius: 25px !important;
+}
+
+.signup_btn
+{
+background-color: #e50914 ;
+border: none ;
+font-weight: bold ;
+width: 100%  ;
+border-radius: 25px ;
+}
+.signinlink{
+    color:#e50914;
+
+   
+   }
+.genderForm {
+
+display: inline !important;
+padding-right: 30px !important;
+
+}

@@ -1,0 +1,13 @@
+
+
+
+::cue {
+background-color: rgba(255, 255, 255, 0);
+color: rgb(248, 171, 3);
+font-weight: bold;
+}
+
+
+.dropdown-toggle::after { 
+    content: none!important; 
+} 

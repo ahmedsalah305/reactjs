@@ -1,0 +1,13 @@
+#!/bin/bash
+
+npm i react-bootstrap
+npm i react-router-dom
+npm i @fortawesome/fontawesome-free
+npm i bootstrap
+npm i react-icons
+npm i styled-components
+npm i axios
+npm i query-string
+npm i react-slick
+npm install slick-carousel --save
+npm i joi
